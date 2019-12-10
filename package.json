@@ -1,0 +1,22 @@
+{
+  "name": "itemizer",
+  "version": "0.0.1",
+  "main": "src/node.js",
+  "browser": "src/browser.js",
+  "files": [
+    "README.md",
+    "src/**.js",
+    "src/emoji/emoji_classes.trie",
+    "wasm/bundle.wasm"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "unicode-properties": "1.2.2"
+  },
+  "devDependencies": {
+    "request": "^2.88.0"
+  },
+  "description": "Segment a JS string into script, emoji, and bidi parts",
+  "repository": "https://github.com/chearon/itemizer",
+  "author": "Caleb Hearon <caleb@chearon.net>"
+}

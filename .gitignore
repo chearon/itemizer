@@ -1,0 +1,11 @@
+# typical crap
+node_modules
+yarn.lock
+yarn-error.log
+
+# generated files
+src/emoji/emoji_scan.c
+wasm/bidi/
+wasm/bundle.wat
+wasm/emoji/
+
