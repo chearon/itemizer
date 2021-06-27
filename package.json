@@ -7,7 +7,7 @@
   "files": [
     "README.md",
     "types.d.ts",
-    "src/**.js",
+    "src/**/*.js",
     "src/emoji/emoji_classes.trie",
     "wasm/bundle.wasm"
   ],
