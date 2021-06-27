@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "main": "src/node.js",
   "browser": "src/browser.js",
+  "types": "types.d.ts",
   "files": [
     "README.md",
+    "types.d.ts",
     "src/**.js",
     "src/emoji/emoji_classes.trie",
     "wasm/bundle.wasm"
