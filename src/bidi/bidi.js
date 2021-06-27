@@ -41,5 +41,5 @@ exports.BidiSegmenter = function ({instance}) {
     free(strPtr);
   }
 
-  return {iterate};
+  return iterate;
 };

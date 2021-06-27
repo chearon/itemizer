@@ -165,5 +165,5 @@ exports.ScriptSegmenter = function () {
     yield {i: scriptEnd, script: runningScript};
   }
 
-  return {iterate};
+  return iterate;
 };

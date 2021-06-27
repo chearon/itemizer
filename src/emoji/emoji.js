@@ -117,7 +117,7 @@ exports.EmojiSegmenter = function ({instance}, trie) {
 		yield* scan(types, offsets);
   }
 
-  return {iterate};
+  return iterate;
 };
 
 exports.Emoji = Emoji;

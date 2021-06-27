@@ -5,7 +5,7 @@ async function go() {
     console.log("Emoji\n-----\n");
 
     const str = 'hello 😀 heres a fam 👪 and a dog 🐕';
-    const segment = emoji.iterate(str);
+    const segment = emoji(str);
     let last = 0;
 
     for (const {i, isEmoji} of segment) {
@@ -20,7 +20,7 @@ async function go() {
     console.log("Bidi\n----\n");
 
     const str = 'یہ ایک )car( ہے۔. Hebrew looks like אָלֶף־בֵּית עִבְרִי';
-    const segment = bidi.iterate(str);
+    const segment = bidi(str);
     let last = 0;
 
     for (const {i, dir} of segment) {
@@ -34,7 +34,7 @@ async function go() {
   {
     console.log("Script\n------\n");
     const str = 'Latin is the most common. スクリプトが大好きです！ពួកគេទាំងអស់';
-    const segment = script.iterate(str);
+    const segment = script(str);
     let last = 0;
 
     for (const {i, script} of segment) {
