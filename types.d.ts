@@ -1,6 +1,6 @@
 declare type ItemizerType = {
   emoji(s: string): Generator<{i: number, isEmoji: boolean}>,
-  bidi(s: string): Generator<{i: number, dir: string}>,
+  bidi(s: string): Generator<{i: number, dir: 'ltr' | 'rtl'}>,
   script(s: string): Generator<{i: number, script: string}>
 };
 
