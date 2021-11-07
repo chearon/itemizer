@@ -30,7 +30,7 @@ The bidi iterator has the same API:
 const str = 'Latin is common ពួកគេទាំងអស់   ';
 
 let last = 0;
-for (const {i, dir} of bidi(str)) {
+for (const {i, dir} of bidi(str/*, 'rtl' for rtl base direction*/)) {
   console.log(str.slice(last, i)); // logs 2 times
   last = i;
 }
