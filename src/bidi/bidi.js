@@ -11,7 +11,7 @@ exports.BidiSegmenter = function ({instance}) {
     memory
   } = instance.exports;
 
-  function* iterate(str, baseDir = 'ltr') {
+  function* iterate(str, initialLevel = 0) {
     const strPtr = malloc(str.length * 2);
     const seqPtr = malloc(12); // sizeof(SBCodepointSequence)
 
@@ -24,17 +24,20 @@ exports.BidiSegmenter = function ({instance}) {
     new Uint32Array(memory.buffer, seqPtr, 3).set([1, strPtr, str.length]);
 
     const algorithm = SBAlgorithmCreate(seqPtr);
-    const paragraph = SBAlgorithmCreateParagraph(algorithm, 0, -1, baseDir === 'ltr' ? 0 : 1);
+    const paragraph = SBAlgorithmCreateParagraph(algorithm, 0, -1, initialLevel);
     const line = SBParagraphCreateLine(paragraph, 0, SBParagraphGetLength(paragraph));
     const runCount = SBLineGetRunCount(line);
     const runArray = SBLineGetRunsPtr(line);
+    const inc = initialLevel % 2 ? -1 : 1;
+    let i = initialLevel % 2 ? runCount - 1 : 0;
 
-    for (let i = runCount - 1; i >= 0; --i) {
+    while (i >= 0 && i < runCount) {
       const runBuf = new Uint32Array(memory.buffer, runArray + i * 12, 3); // 12: sizeof(SBRun)
       const [offset, length, level] = runBuf;
-      const dir = level % 2 === 0 ? 'ltr' : 'rtl';
 
-      yield {i: offset + length, dir};
+      yield {i: offset + length, level};
+
+      i += inc;
     }
 
     free(seqPtr);
