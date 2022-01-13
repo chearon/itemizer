@@ -8,20 +8,20 @@ exports.BidiSegmenter = function ({instance}) {
     SBLineGetRunsPtr,
     malloc,
     free,
-    memory: {buffer}
+    memory
   } = instance.exports;
 
   function* iterate(str, baseDir = 'ltr') {
     const strPtr = malloc(str.length * 2);
     const seqPtr = malloc(12); // sizeof(SBCodepointSequence)
 
-    const strBuf = new Uint16Array(buffer, strPtr, str.length);
+    const strBuf = new Uint16Array(memory.buffer, strPtr, str.length);
     for (let i = 0; i < str.length; ++i) {
       strBuf[i] = str.charCodeAt(i);
     }
 
     // first byte is 1 because 1 === SBStringEncodingUTF16
-    new Uint32Array(buffer, seqPtr, 3).set([1, strPtr, str.length]);
+    new Uint32Array(memory.buffer, seqPtr, 3).set([1, strPtr, str.length]);
 
     const algorithm = SBAlgorithmCreate(seqPtr);
     const paragraph = SBAlgorithmCreateParagraph(algorithm, 0, -1, baseDir === 'ltr' ? 0 : 1);
@@ -30,7 +30,7 @@ exports.BidiSegmenter = function ({instance}) {
     const runArray = SBLineGetRunsPtr(line);
 
     for (let i = runCount - 1; i >= 0; --i) {
-      const runBuf = new Uint32Array(buffer, runArray + i * 12, 3); // 12: sizeof(SBRun)
+      const runBuf = new Uint32Array(memory.buffer, runArray + i * 12, 3); // 12: sizeof(SBRun)
       const [offset, length, level] = runBuf;
       const dir = level % 2 === 0 ? 'ltr' : 'rtl';
 
