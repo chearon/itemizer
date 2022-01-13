@@ -2,10 +2,7 @@ exports.BidiSegmenter = function ({instance}) {
   const {
     SBAlgorithmCreate,
     SBAlgorithmCreateParagraph,
-    SBParagraphGetLength,
-    SBParagraphCreateLine,
-    SBLineGetRunCount,
-    SBLineGetRunsPtr,
+    SBParagraphGetLevelsPtr,
     malloc,
     free,
     memory
@@ -25,19 +22,13 @@ exports.BidiSegmenter = function ({instance}) {
 
     const algorithm = SBAlgorithmCreate(seqPtr);
     const paragraph = SBAlgorithmCreateParagraph(algorithm, 0, -1, initialLevel);
-    const line = SBParagraphCreateLine(paragraph, 0, SBParagraphGetLength(paragraph));
-    const runCount = SBLineGetRunCount(line);
-    const runArray = SBLineGetRunsPtr(line);
-    const inc = initialLevel % 2 ? -1 : 1;
-    let i = initialLevel % 2 ? runCount - 1 : 0;
+    const levels = new Uint8Array(memory.buffer, SBParagraphGetLevelsPtr(paragraph), str.length);
 
-    while (i >= 0 && i < runCount) {
-      const runBuf = new Uint32Array(memory.buffer, runArray + i * 12, 3); // 12: sizeof(SBRun)
-      const [offset, length, level] = runBuf;
-
-      yield {i: offset + length, level};
-
-      i += inc;
+    let lastLevel = levels[0];
+    for (let i = 0; i <= str.length; ++i) {
+      const level = levels[i];
+      if (level !== lastLevel) yield {i, level: lastLevel};
+      lastLevel = level;
     }
 
     free(seqPtr);
