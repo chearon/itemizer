@@ -13,7 +13,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "unicode-properties": "1.2.2"
+    "unicode-properties": "1.2.2",
+    "unicode-trie": "^2.0.0"
   },
   "devDependencies": {
     "request": "^2.88.0"

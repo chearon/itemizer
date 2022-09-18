@@ -1,9 +1,9 @@
 const fs = require('fs');
 const request = require('request');
-const classes = require('./src/emojilib');
+const classes = require('./src/emoji/emoji');
 const UnicodeTrieBuilder = require('unicode-trie/builder');
 
-const trie = new UnicodeTrieBuilder(classes.XX);
+const trie = new UnicodeTrieBuilder();
 
 function process(data) {
   const matches = data.match(/^[0-9A-F]+(\.\.[0-9A-F]+)? *; *[_A-z]+/gm);
@@ -22,9 +22,8 @@ function process(data) {
     const rangeType = typeColumn.match(/[A-z_]+/)[0];
 
     if (rangeType in classes) {
-      if (rangeType in classes) {
-        trie.setRange(parseInt(rangeStart, 16), parseInt(rangeEnd, 16), classes[rangeType], true);
-      }
+      if (typeof classes[rangeType] !== 'number') throw new Error(`Unknown class ${rangeType}`);
+      trie.setRange(parseInt(rangeStart, 16), parseInt(rangeEnd, 16), classes[rangeType], true);
     }
   }
 }
