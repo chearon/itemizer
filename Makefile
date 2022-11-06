@@ -5,6 +5,7 @@ CXXFLAGS = \
 	-Wall \
 	--target=wasm32 \
 	-Os \
+	-DNDEBUG \
 	--sysroot=$(WASI_SYSROOT)
 LD = /usr/local/opt/llvm/bin/wasm-ld
 LDFLAGS = \
@@ -30,7 +31,7 @@ wasm/bundle.wat: wasm/bundle.wasm
 	wasm2wat $< > $@
 
 wasm/bundle.wasm: wasm/emoji/emoji_scan.o wasm/bidi/bidi.o
-	$(LD) $(LDFLAGS) -o $@ $^
+	$(LD) $(LDFLAGS) -o $@ --no-entry $^
 
 src/emoji/emoji_scan.c: src/emoji/emoji_scan.rl
 	$(RL) src/emoji/emoji_scan.rl -o src/emoji/emoji_scan.c

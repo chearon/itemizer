@@ -19,9 +19,9 @@
 #ifdef SB_CONFIG_LOG
 
 #include "SBBase.h"
-#include "SBBidiChain.h"
+#include "BidiChain.h"
 #include "SBBidiType.h"
-#include "SBIsolatingRun.h"
+#include "IsolatingRun.h"
 #include "SBLog.h"
 
 int _SBLogPosition = 0;
@@ -246,7 +246,7 @@ static void PrintTypesOperation(IsolatingRunRef isolatingRun, IsolatingContext *
 SB_INTERNAL void PrintRunTypes(IsolatingRunRef isolatingRun)
 {
     IsolatingContext context;
-    IsolatingRunForEach(isolatingRun, &context, _SBPrintTypesOperation);
+    IsolatingRunForEach(isolatingRun, &context, PrintTypesOperation);
 }
 
 static void PrintLevelsOperation(IsolatingRunRef isolatingRun, IsolatingContext *context)
@@ -262,7 +262,7 @@ static void PrintLevelsOperation(IsolatingRunRef isolatingRun, IsolatingContext 
 SB_INTERNAL void PrintRunLevels(IsolatingRunRef isolatingRun)
 {
     IsolatingContext context;
-    IsolatingRunForEach(isolatingRun, &context, _SBPrintLevelsOperation);
+    IsolatingRunForEach(isolatingRun, &context, PrintLevelsOperation);
 }
 
 typedef struct {
@@ -295,7 +295,7 @@ SB_INTERNAL void PrintRunRange(IsolatingRunRef isolatingRun)
     IsolatingContext context;
     context.object = &range;
 
-    IsolatingRunForEach(isolatingRun, &context, _SBPrintRangeOperation);
+    IsolatingRunForEach(isolatingRun, &context, PrintRangeOperation);
     SB_LOG_RANGE(range.offset, range.length);
     SB_LOG_DIVIDER(1);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2019 Muhammad Tayyab Akram
+ * Copyright (C) 2018-2021 Muhammad Tayyab Akram
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -213,7 +213,20 @@ enum {
     SBScriptELYM = 0x96,    /**< Elymaic */
     SBScriptHMNP = 0x97,    /**< Nyiakeng_Puachue_Hmong */
     SBScriptNAND = 0x98,    /**< Nandinagari */
-    SBScriptWCHO = 0x99     /**< Wancho */
+    SBScriptWCHO = 0x99,    /**< Wancho */
+
+    /* Unicde 13.0 */
+    SBScriptCHRS = 0x9A,    /**< Chorasmian */
+    SBScriptDIAK = 0x9B,    /**< Dives_Akuru */
+    SBScriptKITS = 0x9C,    /**< Khitan_Small_Script */
+    SBScriptYEZI = 0x9D,    /**< Yezidi */
+
+    /* Unicde 14.0 */
+    SBScriptCPMN = 0x9E,    /**< Cypro_Minoan */
+    SBScriptOUGR = 0x9F,    /**< Old_Uyghur */
+    SBScriptTNSA = 0xA0,    /**< Tangsa */
+    SBScriptTOTO = 0xA1,    /**< Toto */
+    SBScriptVITH = 0xA2     /**< Vithkuqi */
 };
 
 /**

@@ -17,6 +17,8 @@
 #ifndef _SB_INTERNAL_ASSERT_H
 #define _SB_INTERNAL_ASSERT_H
 
-#define SBAssert(exp)
+#include <assert.h>
+
+#define SBAssert(exp)   assert(exp)
 
 #endif

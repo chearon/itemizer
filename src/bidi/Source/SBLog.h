@@ -26,7 +26,7 @@
 #include "SBBase.h"
 #include "SBBidiType.h"
 #include "SBCodepointSequence.h"
-#include "SBIsolatingRun.h"
+#include "IsolatingRun.h"
 
 SB_INTERNAL void PrintBaseLevel(SBLevel baseLevel);
 SB_INTERNAL void PrintBidiType(SBBidiType type);
