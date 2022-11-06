@@ -28,6 +28,7 @@ exports.BidiSegmenter = function ({instance}) {
     let offset = 0;
     let lastLevel;
     while (offset < str.length) {
+      twoInts.set([0, 0]);
       SBAlgorithmGetParagraphBoundary(algorithm, offset, str.length - offset, paraLenPtr, paraSepPtr);
       const [paraLen, paraSep] = twoInts;
       const paragraph = SBAlgorithmCreateParagraph(algorithm, offset, paraLen + paraSep, initialLevel);
