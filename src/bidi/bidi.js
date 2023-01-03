@@ -12,7 +12,8 @@ exports.BidiSegmenter = function ({instance}) {
   function* iterate(str, initialLevel = 0) {
     const strPtr = malloc(str.length * 2);
     const seqPtr = malloc(12); // sizeof(SBCodepointSequence)
-    const twoInts = new Uint32Array(memory.buffer, malloc(8) /* sizeof(SBUInteger) * 2 */, 2);
+    const paraLenPtr = malloc(8 /* sizeof(SBUInteger) * 2 */);
+    const paraSepPtr = paraLenPtr + 4;
 
     const strBuf = new Uint16Array(memory.buffer, strPtr, str.length);
     for (let i = 0; i < str.length; ++i) {
@@ -23,11 +24,10 @@ exports.BidiSegmenter = function ({instance}) {
     new Uint32Array(memory.buffer, seqPtr, 3).set([1, strPtr, str.length]);
 
     const algorithm = SBAlgorithmCreate(seqPtr);
-    const paraLenPtr = twoInts.byteOffset;
-    const paraSepPtr = twoInts.byteOffset + 4;
     let offset = 0;
     let lastLevel;
     while (offset < str.length) {
+      const twoInts = new Uint32Array(memory.buffer, paraLenPtr, 2);
       twoInts.set([0, 0]);
       SBAlgorithmGetParagraphBoundary(algorithm, offset, str.length - offset, paraLenPtr, paraSepPtr);
       const [paraLen, paraSep] = twoInts;
