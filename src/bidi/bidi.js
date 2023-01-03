@@ -1,8 +1,10 @@
 exports.BidiSegmenter = function ({instance}) {
   const {
     SBAlgorithmCreate,
+    SBAlgorithmRelease,
     SBAlgorithmGetParagraphBoundary,
     SBAlgorithmCreateParagraph,
+    SBParagraphRelease,
     SBParagraphGetLevelsPtr,
     malloc,
     free,
@@ -46,8 +48,12 @@ exports.BidiSegmenter = function ({instance}) {
         lastLevel = level;
       }
 
-      offset += paraLen + paraSep
+      offset += paraLen + paraSep;
+
+      SBParagraphRelease(paragraph);
     }
+
+    SBAlgorithmRelease(algorithm);
 
     free(seqPtr);
     free(strPtr);
