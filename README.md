@@ -56,7 +56,7 @@ $ node test.js
 ## Building the WebAssembly locally
 
 1. Get [ragel](http://www.colm.net/open-source/ragel/) from your package manager
-2. Get [WASI (sysroot version)](https://github.com/CraneStation/wasi-sdk/releases/download/wasi-sdk-8/wasi-sysroot-8.0.tar.gz)
+2. Get [WASI (sysroot version)](https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-19/wasi-sysroot-19.0.tar.gz)
 3. Get LLVM Clang 9+ from your package manager
 4. Open the makefile and set `RL`, `WASI_SYSROOT` `CXX` according to steps 1, 2, 3
 5. `make`
