@@ -1,6 +1,6 @@
 {
   "name": "itemizer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "src/node.js",
   "browser": "src/browser.js",
   "types": "types.d.ts",
